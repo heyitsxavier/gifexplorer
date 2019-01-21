@@ -1,0 +1,5 @@
+.image-space {
+    border: 5px darkgray dotted;
+    margin: 30px;
+    flex: 2;
+}
