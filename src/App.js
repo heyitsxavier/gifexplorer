@@ -9,6 +9,7 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.changeGif = this.changeGif.bind(this);
     this.state = {
       schema: null
     };
@@ -17,11 +18,14 @@ class App extends Component {
   componentDidMount() {
     fetch(sammyURL)
       .then(response => response.arrayBuffer())
-      .then(buffer => {
-        let schema = this.processGif(buffer);
-        this.setState({schema});
-        console.log("State set");
-      }).catch(error => console.error(error));
+      .then(this.changeGif)
+      .catch(error => console.error(error));
+  }
+
+  changeGif(buffer) {
+    let schema = this.processGif(buffer);
+    console.log(buffer);
+    this.setState({ schema });
   }
 
   processGif(arrayBuffer) {

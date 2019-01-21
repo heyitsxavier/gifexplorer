@@ -8,8 +8,14 @@ class ImageSpace extends Component {
   }
 
   onDrop = (acceptedFiles, rejectedFiles) => {
+    let fileReader = new FileReader();
     let theFile = acceptedFiles[0];
-    this.props.changeGif(theFile);
+    fileReader.onload = function(e) {
+      let arrayBuffer = fileReader.result;
+      this.props.changeGif(arrayBuffer);
+    }
+    fileReader.onload = fileReader.onload.bind(this);
+    fileReader.readAsArrayBuffer(theFile);
   }
 
   render() {
